@@ -49,7 +49,7 @@ Install dependencies:
 pip install -r requirements.txt
 ```
 #### DreamID-V-Wan-1.3B-Faster
-Please ensure the you have downloaded [dreamidv_faster.pth](https://huggingface.co/XuGuo699/DreamID-V/blob/main/dreamidv_faster.pth) and the DWPose estimation models are placed in the correct directory.
+Please ensure you have downloaded [dreamidv_faster.pth](https://huggingface.co/XuGuo699/DreamID-V/blob/main/dreamidv_faster.pth) and the DWPose estimation models are placed in the correct directory.
 ```text
 DreamID-V/
 └── pose/
@@ -57,6 +57,7 @@ DreamID-V/
         ├── dw-ll_ucoco_384.onnx 
         └── yolox_l.onnx         
 ```
+- Single-GPU inference
 ``` sh
 python generate_dreamidv_faster.py \
     --size 832*480 \
