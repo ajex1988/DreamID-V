@@ -48,6 +48,39 @@ Install dependencies:
 # Ensure torch >= 2.4.0
 pip install -r requirements.txt
 ```
+#### DreamID-V-Wan-1.3B-Faster
+Please ensure the you have downloaded [dreamidv_faster.pth](https://huggingface.co/XuGuo699/DreamID-V/blob/main/dreamidv_faster.pth) and the DWPose estimation models are placed in the correct directory.
+```text
+DreamID-V/
+└── pose/
+    └── models/
+        ├── dw-ll_ucoco_384.onnx 
+        └── yolox_l.onnx         
+```
+``` sh
+python generate_dreamidv_faster.py \
+    --size 832*480 \
+    --ckpt_dir wan2.1-1.3B path \
+    --dreamidv_ckpt dreamidv_faster.pth path  \
+    --sample_steps 16 \
+    --base_seed 42
+```
+- Multi-GPU inference using FSDP + xDiT USP
+
+``` sh
+pip install "xfuser>=0.4.1"
+torchrun --nproc_per_node=2 generate_dreamidv_faster.py \
+    --size 832*480 \
+    --ckpt_dir wan2.1-1.3B path \
+    --dreamidv_ckpt dreamidv_faster.pth path  \
+    --sample_steps 16 \
+    --dit_fsdp \
+    --t5_fsdp \
+    --ulysses_size 2 \
+    --ring_size 1 \
+    --base_seed 42
+```
+
 #### DreamID-V-Wan-1.3B-DWPose
 Please ensure the pose estimation models are placed in the correct directory as follows:
 ```text
