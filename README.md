@@ -142,3 +142,7 @@ If you find our work helpful, please consider citing our paper and leaving valua
       url={https://arxiv.org/abs/2601.01425}, 
 }
 ```
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=bytedance/DreamID-V&type=date&legend=top-left)](https://www.star-history.com/#bytedance/DreamID-V&type=date&legend=top-left)
