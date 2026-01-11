@@ -16,7 +16,7 @@
 <p>
 
 ## 🔥 News
-- [01/12/2026] 🔥 We have launched [DreamID-V-Wan-1.3B-Faster](https://github.com/bytedance/DreamID-V?tab=readme-ov-file#dreamid-v-wan-13b-faster), achieving a 1x inference speed boost with lower VRAM usage!
+- [01/12/2026] 🔥 We released [DreamID-V-Wan-1.3B-Faster](https://github.com/bytedance/DreamID-V?tab=readme-ov-file#dreamid-v-wan-13b-faster), achieving a 1x inference speed boost with lower VRAM usage!
 - [01/11/2026] 🔥 Thanks Goldlionren for supporting the [16GB VRAM GPUs version](https://github.com/Goldlionren/ComfyUI_JR_DreamID-V).
 - [01/10/2026] 🔥 We released [DreamID-V-Wan-1.3B-DWPose](https://github.com/bytedance/DreamID-V/tree/main?tab=readme-ov-file#dreamid-v-wan-13b-dwpose) with enhanced pose detection stability!
 - [01/08/2026] 🔥 Thanks HM-RunningHub for supporting [ComfyUI](https://github.com/HM-RunningHub/ComfyUI_RH_DreamID-V).
