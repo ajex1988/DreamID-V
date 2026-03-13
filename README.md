@@ -1,14 +1,14 @@
-# DreamID-V: Bridging the Image-to-Video Gap for High-Fidelity Face Swapping via Diffusion Transformer
+# DreamID-Omni: Unified Framework for Controllable Human-Centric Audio-Video Generation
 
 <p align="center">
-  <a href="https://guoxu1233.github.io/DreamID-V/">🌐 Project Page</a> |
-  <a href="https://arxiv.org/abs/2601.01425">📜 Arxiv</a> |
-  <a href="https://huggingface.co/XuGuo699/DreamID-V">🤗 Models</a> |
+  <a href="https://guoxu1233.github.io/DreamID-Omni/">🌐 Project Page</a> |
+  <a href="https://arxiv.org/abs/2602.12160">📜 Arxiv</a> |
+  <a href="https://huggingface.co/XuGuo699/DreamID-Omni">🤗 Models</a> |
 </p>
 
-> **DreamID-V: Bridging the Image-to-Video Gap for High-Fidelity Face Swapping via Diffusion Transformer**<br>
-> [Xu Guo](https://github.com/Guoxu1233/)<sup> * </sup>, [Fulong Ye](https://scholar.google.com/citations?user=-BbQ5VgAAAAJ&hl=zh-CN/)<sup> * </sup>, [Xinghui Li](https://crayon-shinchan.github.io/xinghui99.github.io/)<sup> *</sup>, [Pengqi Tu](https://openreview.net/profile?id=%7EPengqi_Tu1), [Pengze Zhang](https://pangzecheung.github.io/Homepage/), [Qichao Sun](https://github.com/sun631998316), [Songtao Zhao](https://openreview.net/profile?id=~Songtao_Zhao1)<sup> &dagger;</sup>, [Xiangwang Hou](https://scholar.google.com/citations?user=bpskf9kAAAAJ&hl=zh-CN)<sup> &dagger;</sup> [Qian He](https://scholar.google.com/citations?user=9rWWCgUAAAAJ)
-> <br><sup> * </sup>Equal contribution,<sup> &dagger; </sup>Corresponding author
+> **DreamID-Omni: Unified Framework for Controllable Human-Centric Audio-Video Generation**<br>
+> [Xu Guo](https://github.com/Guoxu1233/)<sup> * </sup>, [Fulong Ye](https://scholar.google.com/citations?user=-BbQ5VgAAAAJ&hl=zh-CN/)<sup> * </sup>, [Qichao Sun](https://github.com/sun631998316)<sup> *</sup><sup>&dagger;</sup>, [Liyang Chen](https://leoniuschen.github.io/),  [Bingchuan Li](https://scholar.google.com/citations?user=ac5Se6QAAAAJ&hl=zh-CN)<sup> &dagger;</sup>, [Pengze Zhang](https://pangzecheung.github.io/Homepage/), [Jiawei Liu](https://scholar.google.com/citations?user=X21Fz-EAAAAJ&hl=zh-CN), [Songtao Zhao](https://openreview.net/profile?id=~Songtao_Zhao1)<sup> &sect;</sup>,  [Qian He](https://scholar.google.com/citations?user=9rWWCgUAAAAJ), [Xiangwang Hou](https://scholar.google.com/citations?user=bpskf9kAAAAJ&hl=zh-CN)<sup> &sect;</sup>
+> <br><sup> * </sup>Equal contribution,<sup> &dagger; </sup>Project lead, <sup> &sect; </sup>Corresponding author 
 > <br>Tsinghua University | Intelligent Creation Team, ByteDance<br>
 
 <p align="center">
@@ -16,148 +16,62 @@
 <p>
 
 ## 🔥 News
-- [01/13/2026] 🔥 Thanks Goldlionren for supporting the [DreamID-V Faster ComfyUI](https://github.com/Goldlionren/ComfyUI_JR_DreamID-V).
-- [01/12/2026] 🔥 We released [DreamID-V-Wan-1.3B-Faster](https://github.com/bytedance/DreamID-V?tab=readme-ov-file#dreamid-v-wan-13b-faster), achieving a 1x inference speed boost with lower VRAM usage!
-- [01/11/2026] 🔥 Thanks Goldlionren for supporting the [16GB VRAM GPUs version ComfyUI](https://github.com/Goldlionren/ComfyUI_JR_DreamID-V).
-- [01/10/2026] 🔥 We released [DreamID-V-Wan-1.3B-DWPose](https://github.com/bytedance/DreamID-V/tree/main?tab=readme-ov-file#dreamid-v-wan-13b-dwpose) with enhanced pose detection stability!
-- [01/08/2026] 🔥 Thanks HM-RunningHub for supporting [ComfyUI](https://github.com/HM-RunningHub/ComfyUI_RH_DreamID-V).
-- [01/06/2026] 🔥 Our [paper](https://arxiv.org/abs/2601.01425) is released! 
-- [01/05/2026] 🔥 Our code is released!
-- [12/17/2025] 🔥 Our [project](https://guoxu1233.github.io/DreamID-V/) is released!
-- [08/11/2025] 🎉 Our image version [DreamID](https://superhero-7.github.io/DreamID/) is accepted by SIGGRAPH Asia 2025!
+- [03/13/2026] 🔥 Our v1 version [code](https://github.com/Guoxu1233/DreamID-Omni) for R2AV is released!
+- [02/13/2026] 🔥 Our [paper](https://arxiv.org/abs/2602.12160) is released!
+- [01/05/2026] 🔥 The code for our previous work, [DreamID-V](https://github.com/bytedance/DreamID-V), has been released!
 
 
-## 💡 Usage Tips
-- **Reference Image Preparation**: Please upload **cropped face images** (recommended resolution: 512x512) as reference. Avoid using full-body photos to ensure optimal identity preservation.
-- **Inference Steps**: For simple scenes, you can reduce the sampling steps to **20** to significantly decrease inference time. 
-  > *Note*: Our internal model based on Seedance1.0 achieves high quality in under 8 steps. Feel free to experience it at [CapCut](https://www.capcut.cn/).
-- **Best Quality**: For the highest fidelity results, we recommend using a resolution of **1280x720**.
-- **Enhanced Pose Detection**: We have resolved the previous pose detection issue by introducing [**DreamID-V-Wan-1.3B-DWPose**](https://github.com/bytedance/DreamID-V/tree/main?tab=readme-ov-file#dreamid-v-wan-13b-dwpose). This significantly improves stability and robustness in pose extraction.
+## 🎬 Demo
+<div align="center">
+  <video src="https://github.com/user-attachments/assets/21dda629-aee0-4c9e-b1ae-09552880a336" width="70%" poster=""> </video>
+</div>
+
 
 ## ⚡️ Quickstart
-
-### Model Preparation
-| Models       | Download Link                                                                                                                                           |    Notes                      |
-|--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------|
-| DreamID-V | 🤗 [Huggingface](https://huggingface.co/XuGuo699/DreamID-V)   | Supports 480P & 720P 
-| Wan-2.1 | 🤗 [Huggingface](https://huggingface.co/Wan-AI/Wan2.1-T2V-1.3B) | VAE & Text encoder
-
 ### Installation
-
-
-Install dependencies:
-```sh
-# Ensure torch >= 2.4.0
+```bash
+python3 download_weights.py
+conda create -n dreamid_omni python=3.11
+conda activate dreamid_omni
+pip install torch==2.6.0 torchvision torchaudio
 pip install -r requirements.txt
+pip install flash_attn --no-build-isolation
 ```
-#### DreamID-V-Wan-1.3B-Faster
-Please ensure you have downloaded [dreamidv_faster.pth](https://huggingface.co/XuGuo699/DreamID-V/blob/main/dreamidv_faster.pth) and the DWPose estimation models are placed in the correct directory.
-```text
-DreamID-V/
-└── pose/
-    └── models/
-        ├── dw-ll_ucoco_384.onnx 
-        └── yolox_l.onnx         
-```
-- Single-GPU inference
+### Inference
+
+#### Single-GPU inference
 ``` sh
-python generate_dreamidv_faster.py \
-    --size 832*480 \
-    --ckpt_dir wan2.1-1.3B path \
-    --dreamidv_ckpt dreamidv_faster.pth path  \
-    --sample_steps 16 \
-    --base_seed 42
+python3 inference_r2av.py --config-file dreamid_omni/configs/inference/inference_r2av.yaml
 ```
-- Multi-GPU inference using FSDP + xDiT USP
 
+#### Multi-GPU inference
 ``` sh
-pip install "xfuser>=0.4.1"
-torchrun --nproc_per_node=2 generate_dreamidv_faster.py \
-    --size 832*480 \
-    --ckpt_dir wan2.1-1.3B path \
-    --dreamidv_ckpt dreamidv_faster.pth path  \
-    --sample_steps 16 \
-    --dit_fsdp \
-    --t5_fsdp \
-    --ulysses_size 2 \
-    --ring_size 1 \
-    --base_seed 42
+torchrun --nnodes 1 --nproc_per_node 8 inference_r2av.py --config-file dreamid_omni/configs/inference/inference_r2av.yaml
 ```
-
-#### DreamID-V-Wan-1.3B-DWPose
-Please ensure the pose estimation models are placed in the correct directory as follows:
-```text
-DreamID-V/
-└── pose/
-    └── models/
-        ├── dw-ll_ucoco_384.onnx 
-        └── yolox_l.onnx         
-```
-- Single-GPU inference
-
-``` sh
-python generate_dreamidv_dwpose.py \
-    --size 832*480 \
-    --ckpt_dir wan2.1-1.3B path \
-    --dreamidv_ckpt dreamidv.pth path  \
-    --sample_steps 20 \
-    --base_seed 42
-```
-- Multi-GPU inference using FSDP + xDiT USP
-
-``` sh
-pip install "xfuser>=0.4.1"
-torchrun --nproc_per_node=2 generate_dreamidv_dwpose.py \
-    --size 832*480 \
-    --ckpt_dir wan2.1-1.3B path \
-    --dreamidv_ckpt dreamidv.pth path  \
-    --sample_steps 20 \
-    --dit_fsdp \
-    --t5_fsdp \
-    --ulysses_size 2 \
-    --ring_size 1 \
-    --base_seed 42
-```
-
-#### DreamID-V-Wan-1.3B-MediaPipe
-
-- Single-GPU inference
-
-``` sh
-python generate_dreamidv.py \
-    --size 832*480 \
-    --ckpt_dir wan2.1-1.3B path \
-    --dreamidv_ckpt dreamidv.pth path  \
-    --sample_steps 20 \
-    --base_seed 42
-```
-
-- Multi-GPU inference using FSDP + xDiT USP
-
-``` sh
-pip install "xfuser>=0.4.1"
-torchrun --nproc_per_node=2 generate_dreamidv.py \
-    --size 832*480 \
-    --ckpt_dir wan2.1-1.3B path \
-    --dreamidv_ckpt dreamidv.pth path  \
-    --sample_steps 20 \
-    --dit_fsdp \
-    --t5_fsdp \
-    --ulysses_size 2 \
-    --ring_size 1 \
-    --base_seed 42
-```
+Before running multi-GPU inference, please open `dreamid_omni/configs/inference/inference_r2av.yaml` and set sp_size: 8
 
 
-## 👍 Acknowledgements
-Our work builds upon and is greatly inspired by several outstanding open-source projects, including [Wan2.1](https://github.com/Wan-Video/Wan2.1), [Phantom](https://github.com/Phantom-video/Phantom), [OpenHumanVid](https://github.com/fudan-generative-vision/OpenHumanVid), [Follow-Your-Emoji](https://github.com/mayuelala/FollowYourEmoji), [DWPose](https://github.com/IDEA-Research/DWPose). We sincerely thank the authors and contributors of these projects for generously sharing their excellent codes and ideas.
+
+## 🎨 How to Create 
+Our prompts use the following special tags to control characters and speech:
+- **Subject Identity**: `<sub1>`, `<sub2>` - Represents the character IPs provided in your input images (e.g., `<img1>` corresponds to `<sub1>`). Use these tags in your prompt to specify who is acting or speaking.
+- **Speech**: `<S>Your speech content here<E>` - Text enclosed in these tags will be converted to speech using the corresponding character's reference audio.
+### 💡 Structure Example
+We provide example prompts to help you get started with DreamID-Omni:
+- **Single-person generation**: `test_case/oneip`
+- **Multi-person generation**: `test_case/twoip`
+
+
+## 🙏 Acknowledgements
+
+Our work builds upon and is greatly inspired by several outstanding open-source projects, including [Ovi](https://github.com/character-ai/Ovi), [Wan2.2](https://github.com/Wan-Video/Wan2.2), [MMAudio](https://github.com/hkchengrex/MMAudio), [Phantom](https://github.com/Phantom-video/Phantom), [HuMo](https://github.com/Phantom-video/HuMo), [OpenHumanVid](https://github.com/fudan-generative-vision/OpenHumanVid). We sincerely thank the authors and contributors of these projects for generously sharing their excellent codes and ideas.
 
 
 ## 📧 Contact
-If you have any comments or questions regarding this open-source project, please open a new issue or contact [Xu Guo](https://github.com/Guoxu1233/) and [Fulong Ye](https://github.com/superhero-7).
+If you have any comments or questions regarding this open-source project, please open a new issue or contact [Xu Guo](https://github.com/Guoxu1233/), [Fulong Ye](https://github.com/superhero-7) and [Qichao Sun](https://github.com/sun631998316).
 
 ## ⚠️ Ethics Statement
-This project, **DreamID-V**, is intended for **academic research and technical demonstration purposes only**.
+This project, **DreamID-Omni**, is intended for **academic research and technical demonstration purposes only**.
 - **Prohibited Use**: Users are strictly prohibited from using this codebase to generate content that is illegal, defamatory, pornographic, harmful, or infringes upon the privacy and rights of others.
 - **Responsibility**: Users bear full responsibility for the content they generate. The authors and contributors of this project assume no liability for any misuse or consequences arising from the use of this software.
 - **AI Labeling**: We strongly recommend marking generated videos as "AI-Generated" to prevent misinformation.
@@ -168,17 +82,15 @@ By using this software, you agree to adhere to these guidelines and applicable l
 If you find our work helpful, please consider citing our paper and leaving valuable stars
 
 ```
-@misc{guo2026dreamidvbridgingimagetovideogaphighfidelity,
-      title={DreamID-V:Bridging the Image-to-Video Gap for High-Fidelity Face Swapping via Diffusion Transformer}, 
-      author={Xu Guo and Fulong Ye and Xinghui Li and Pengqi Tu and Pengze Zhang and Qichao Sun and Songtao Zhao and Xiangwang Hou and Qian He},
+@misc{guo2026dreamidomni,
+      title={DreamID-Omni: Unified Framework for Controllable Human-Centric Audio-Video Generation}, 
+      author={Xu Guo and Fulong Ye and Qichao Sun and Liyang Chen and Bingchuan Li and Pengze Zhang and Jiawei Liu and Songtao Zhao and Qian He and Xiangwang Hou},
       year={2026},
-      eprint={2601.01425},
+      eprint={2602.12160},
       archivePrefix={arXiv},
       primaryClass={cs.CV},
-      url={https://arxiv.org/abs/2601.01425}, 
+      url={https://arxiv.org/abs/2602.12160}, 
 }
 ```
 
-## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=bytedance/DreamID-V&type=date&legend=top-left)](https://www.star-history.com/#bytedance/DreamID-V&type=date&legend=top-left)
