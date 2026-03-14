@@ -324,12 +324,17 @@ def generate_chunked(args):
     vr = VideoReader(ref_video_path)
     mask_vr = VideoReader(final_mask_path)
     total_frames = len(vr)
-    if len(mask_vr) != total_frames:
+    mask_len = len(mask_vr)
+    if mask_len != total_frames and rank == 0:
         logging.warning(
-            f"Mask frame count ({len(mask_vr)}) != video frame count ({total_frames}). Using min of both."
-        )
-        total_frames = min(total_frames, len(mask_vr))
+            f"Mask frame count ({mask_len}) != video frame count ({total_frames}). "
+            "Padding mask with its last frame to keep lengths aligned.")
     src_fps = max(round(vr.get_avg_fps()), 1)
+
+    if (chunk_size - 1) % 4 != 0 and rank == 0:
+        logging.warning(
+            f"chunk_size={chunk_size} is not in the form 4n+1; DreamID-V will internally round "
+            "each chunk down by up to 3 frames.")
 
     chunks = _build_chunks(total_frames, chunk_size)
     if rank == 0:
@@ -341,7 +346,10 @@ def generate_chunked(args):
     for chunk_idx, (start, end) in enumerate(chunks):
         if rank == 0:
             frames = [vr[i].asnumpy() for i in range(start, end)]
-            mask_frames = [mask_vr[i].asnumpy() for i in range(start, end)]
+            mask_frames = [
+                mask_vr[i].asnumpy() if i < mask_len else mask_vr[mask_len - 1].asnumpy()
+                for i in range(start, end)
+            ]
             # Avoid tiny chunks by padding with last frame.
             while len(frames) < 5:
                 frames.append(frames[-1])
