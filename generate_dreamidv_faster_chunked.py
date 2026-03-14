@@ -216,6 +216,18 @@ def _build_chunks(total_frames, chunk_size):
     return chunks
 
 
+def _largest_valid_chunk_size(max_chunk_size):
+    if max_chunk_size < 5:
+        raise ValueError("chunk_size must be at least 5 because DreamID-V requires 4n+1 frames.")
+    return ((max_chunk_size - 1) // 4) * 4 + 1
+
+
+def _next_valid_frame_count(frame_count):
+    if frame_count <= 5:
+        return 5
+    return ((frame_count - 1 + 3) // 4) * 4 + 1
+
+
 def generate_chunked(args):
     rank = int(os.getenv("RANK", 0))
     world_size = int(os.getenv("WORLD_SIZE", 1))
@@ -314,9 +326,10 @@ def generate_chunked(args):
     if dist.is_initialized():
         dist.barrier()
 
-    chunk_size = args.chunk_size or args.frame_num
-    if chunk_size is None or chunk_size <= 0:
+    requested_chunk_size = args.chunk_size or args.frame_num
+    if requested_chunk_size is None or requested_chunk_size <= 0:
         raise ValueError("chunk_size must be positive. Set --chunk_size or --frame_num.")
+    chunk_size = _largest_valid_chunk_size(requested_chunk_size)
 
     # Prepare video readers to determine chunking.
     from decord import VideoReader
@@ -331,27 +344,31 @@ def generate_chunked(args):
             "Padding mask with its last frame to keep lengths aligned.")
     src_fps = max(round(vr.get_avg_fps()), 1)
 
-    if (chunk_size - 1) % 4 != 0 and rank == 0:
+    if requested_chunk_size != chunk_size and rank == 0:
         logging.warning(
-            f"chunk_size={chunk_size} is not in the form 4n+1; DreamID-V will internally round "
-            "each chunk down by up to 3 frames.")
+            f"Requested chunk_size={requested_chunk_size} is not in the form 4n+1. "
+            f"Using effective chunk size {chunk_size} to avoid DreamID-V truncating frames.")
 
     chunks = _build_chunks(total_frames, chunk_size)
     if rank == 0:
-        logging.info(f"Total frames: {total_frames}, chunk_size: {chunk_size}, chunks: {len(chunks)}")
+        logging.info(
+            f"Total frames: {total_frames}, requested_chunk_size: {requested_chunk_size}, "
+            f"effective_chunk_size: {chunk_size}, chunks: {len(chunks)}")
 
     chunk_outputs = []
     chunk_dir = os.path.join(temp_dir, "chunks")
 
     for chunk_idx, (start, end) in enumerate(chunks):
+        actual_chunk_len = end - start
+        padded_chunk_len = _next_valid_frame_count(actual_chunk_len)
         if rank == 0:
             frames = [vr[i].asnumpy() for i in range(start, end)]
             mask_frames = [
                 mask_vr[i].asnumpy() if i < mask_len else mask_vr[mask_len - 1].asnumpy()
                 for i in range(start, end)
             ]
-            # Avoid tiny chunks by padding with last frame.
-            while len(frames) < 5:
+            # Pad to a 4n+1 length so DreamID-V does not silently drop frames.
+            while len(frames) < padded_chunk_len:
                 frames.append(frames[-1])
                 mask_frames.append(mask_frames[-1])
 
@@ -381,7 +398,7 @@ def generate_chunked(args):
             text_prompt,
             ref_paths,
             size=SIZE_CONFIGS[args.size],
-            frame_num=chunk_size,
+            frame_num=padded_chunk_len,
             shift=args.sample_shift,
             sample_solver=args.sample_solver,
             sampling_steps=args.sample_steps,
@@ -391,7 +408,7 @@ def generate_chunked(args):
         )
 
         if rank == 0 and chunk_video is not None:
-            chunk_outputs.append(chunk_video.cpu())
+            chunk_outputs.append(chunk_video[:, :actual_chunk_len].cpu())
 
         if dist.is_initialized():
             dist.barrier()
