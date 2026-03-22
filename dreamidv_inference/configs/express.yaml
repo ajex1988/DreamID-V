@@ -1,0 +1,29 @@
+pipeline:
+  name: express
+  prompt: chang face
+
+model:
+  task: swapface
+  size: 1280*720
+  frame_num: 81
+  sample_fps: 24
+  ckpt_dir: /path/to/wan/checkpoints
+  dreamidv_ckpt: /path/to/dreamidv.ckpt
+  sample_solver: unipc
+  sample_steps: 12
+  sample_shift: 5.0
+  sample_guide_scale_img: 4.0
+  base_seed: -1
+
+inputs:
+  ref_image: ./assets/test_case/ref_image/an_1.jpg
+  ref_video: ./assets/test_case/ref_video/a_girl.mp4
+
+chunk:
+  enabled: true
+  chunk_size: 81
+  reuse_preprocessed: true
+  reuse_chunk_files: false
+
+output:
+  output_dir: ./results_unified

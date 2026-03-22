@@ -10,6 +10,7 @@ tqdm
 imageio
 onnxruntime
 easydict
+pyyaml
 ftfy
 dashscope
 imageio-ffmpeg
